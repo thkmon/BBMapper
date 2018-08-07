@@ -16,7 +16,7 @@ public class BBMapperExample {
 		try {
 			BBExampleEntity entity = new BBExampleEntity();
 			
-			BBMapper bbMapper = new BBMapper();
+			BBMapper bbMapper = new BBMapper("localhost", 3306, "ddoc", "ddoc", "ddoc");
 			BBEntityList resultList = bbMapper.select(entity, " SELECT 'test1' column1, 'test2' column2 ");
 			System.out.println(resultList);
 			

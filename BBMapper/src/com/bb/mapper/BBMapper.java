@@ -14,11 +14,22 @@ import com.bb.mapper.util.BBMapperUtil;
 
 public class BBMapper {
 
+	private String dbUrl = "";
+	private String dbUser = "";
+	private String dbPassword = "";
 	
 	private Connection privateConn = null;
 	private String sql = null;
 	private BBColumnValueList columnValueList = null;
 
+	
+	public BBMapper(String url, int port, String dbName, String dbUser, String dbPassword) {
+		// "jdbc:mysql://localhost:3306/ddoc?useUnicode=true&characterEncoding=utf8";
+		this.dbUrl = "jdbc:mysql://" + url + ":" + port + "/" + dbName + "?useUnicode=true&characterEncoding=utf8";
+		this.dbUser = dbUser;
+		this.dbPassword = dbPassword;
+	}
+	
 	
 	public String getSqlText() {
 		if (sql == null || sql.length() == 0) {
@@ -60,12 +71,7 @@ public class BBMapper {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			
-			String dbUrl = "jdbc:mysql://localhost:3306/ddoc?useUnicode=true&characterEncoding=utf8";
-			String user = "ddoc";
-			String password = "ddoc";
-			
-			privateConn = DriverManager.getConnection(dbUrl, user, password);
+			privateConn = DriverManager.getConnection(this.dbUrl, this.dbUser, this.dbPassword);
 			privateConn.setAutoCommit(false);
 			
 		} catch (Exception e) {
