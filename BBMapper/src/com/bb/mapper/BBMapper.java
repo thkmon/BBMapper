@@ -52,7 +52,12 @@ public class BBMapper {
 	}
 	
 	
-	private void setConnection() {
+	public Connection getConnection() {
+		return privateConn;
+	}
+	
+	
+	public void setConnection() {
 
 		try {
 			if (privateConn != null) {
